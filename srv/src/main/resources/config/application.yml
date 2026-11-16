@@ -194,10 +194,10 @@ info:
 
 jhipster:
 #  cors:
-#    allowed-origins: "*"
+#    allowed-origins: "http://localhost:4200"
 #    allowed-methods: "*"
 #    allowed-headers: "*"
-#    exposed-headers: "Authorization,Link,X-Total-Count"
+#    exposed-headers: "Authorization"
 #    allow-credentials: true
 #    max-age: 1800
   clientApp:
