@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { DemoResourceService } from '../../../api/services/demoResource.service';
 import { DemoDTO } from '../../../api/models';
@@ -11,10 +11,11 @@ import { DemoDTO } from '../../../api/models';
 export class EcommerceComponent implements OnInit {
   
   private demoResourceService: DemoResourceService = inject(DemoResourceService);
-  item: DemoDTO | null = null;
+  item: WritableSignal<DemoDTO | null> = signal<DemoDTO | null>(null);
+
 
   ngOnInit(): void {
-    this.demoResourceService.getDemoFromDBDTO(1).subscribe(data => this.item = data);
+    this.demoResourceService.getDemoDTO().subscribe(data => this.item.set(data));
   }
 
 }

@@ -49,7 +49,8 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) {
         http
             .csrf(csrf -> csrf.disable())
-            .cors(cors -> cors.disable())
+            // .cors(cors -> cors.disable())
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             //.cors(withDefaults())
             .authorizeHttpRequests(authz ->
                 // prettier-ignore
@@ -78,7 +79,7 @@ public class SecurityConfiguration {
         // .jwt(Customizer.withDefaults()));//oauth2.jwt(withDefaults()));
         return http.build();
     }
-/*
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
@@ -94,7 +95,7 @@ public class SecurityConfiguration {
 
         return source;
     }
-*/
+/*
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration config = new CorsConfiguration();
@@ -114,7 +115,7 @@ public class SecurityConfiguration {
         source.registerCorsConfiguration("/**", config);
 
         return new CorsFilter(source);
-    }
+    }*/
     @Bean
     JwtDecoder jwtDecoder() {
         NimbusJwtDecoder jwtDecoder = JwtDecoders.fromOidcIssuerLocation(issuerUri);
