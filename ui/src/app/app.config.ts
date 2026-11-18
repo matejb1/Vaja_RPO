@@ -1,22 +1,17 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { Directionality } from '@angular/cdk/bidi';
+import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { createInterceptorCondition, INCLUDE_BEARER_TOKEN_INTERCEPTOR_CONFIG, IncludeBearerTokenCondition, includeBearerTokenInterceptor, provideKeycloak } from 'keycloak-angular';
-
 import { routes } from './app.routes';
-import { LiveDirectionality } from './core/services/live-directionality.service';
-
+import { provideDefaultClient } from './api';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { createInterceptorCondition, INCLUDE_BEARER_TOKEN_INTERCEPTOR_CONFIG, IncludeBearerTokenCondition, includeBearerTokenInterceptor, provideKeycloak } from 'keycloak-angular';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
-import { provideDefaultClient } from './api/providers';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
-    { provide: Directionality, useClass: LiveDirectionality },
-    
+
     provideDefaultClient({
       basePath: "http://localhost:8081",
     }),
@@ -30,7 +25,6 @@ export const appConfig: ApplicationConfig = {
         })
       ]
     },
-
 
     provideKeycloak({
       config: {
@@ -54,5 +48,5 @@ export const appConfig: ApplicationConfig = {
       fallbackLang: 'en'
     })
 
-  ],
+  ]
 };

@@ -1,8 +1,6 @@
 {
     "home": "Home",
-    "profile": {
-        "edit": "Edit profile",
-        "language": "Language",
-        "signout": "Sign out"
+    "navigation": {
+        "logout": "Logout"
     }
 }
