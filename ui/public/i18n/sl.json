@@ -1,8 +1,6 @@
 {
     "home": "Doma",
-    "profile": {
-        "edit": "Uredi profil",
-        "language": "Jezik",
-        "signout": "Odjava"
+    "navigation": {
+        "logout": "Odjava"
     }
 }
