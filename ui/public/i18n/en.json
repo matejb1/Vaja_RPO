@@ -1,6 +1,17 @@
 {
     "home": "Home",
     "navigation": {
-        "logout": "Logout"
+        "logout": "Log out",
+        "home": "Home",
+        "products": "All products",
+        "profile": "Profile",
+        "myProfile": "My profile",
+        "settings": "Settings",
+        "theme": "Theme",
+        "themeLight": "Light",
+        "themeDark": "Dark",
+        "language": "Language",
+        "mainMenu": "Main menu",
+        "skipToContent": "Skip to content"
     }
 }

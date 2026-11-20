@@ -1,6 +1,17 @@
 {
-    "home": "Haus",
+    "home": "Startseite",
     "navigation": {
-        "logout": "Abmelden"
+        "logout": "Abmelden",
+        "home": "Startseite",
+        "products": "Alle Produkte",
+        "profile": "Profil",
+        "myProfile": "Mein Profil",
+        "settings": "Einstellungen",
+        "theme": "Design",
+        "themeLight": "Hell",
+        "themeDark": "Dunkel",
+        "language": "Sprache",
+        "mainMenu": "Hauptmenü",
+        "skipToContent": "Zum Inhalt springen"
     }
 }
