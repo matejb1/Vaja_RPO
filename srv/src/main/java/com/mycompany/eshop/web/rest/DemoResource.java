@@ -5,6 +5,7 @@ import com.mycompany.eshop.service.DemoService;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +29,7 @@ public class DemoResource {
         content = {
         @Content(
             schema= @Schema(implementation = DemoDTO.class, description = "Demo DTO"),
-            mediaType =  "application/json"
+            mediaType =  MediaType.APPLICATION_JSON_VALUE
         )
     })
     public DemoDTO getDemoDTO() {
@@ -42,11 +43,24 @@ public class DemoResource {
         content = {
             @Content(
                 schema= @Schema(implementation = DemoDTO.class, description = "Demo DTO"),
-                mediaType =  "application/json"
+                mediaType =  MediaType.APPLICATION_JSON_VALUE
             )
         })
     public Optional<DemoDTO> getDemoFromDBDTO(@PathVariable(name = "id")  Long id) {
         return this.demoService.getDemoFromDBDTO(id);
+    }
+
+    @GetMapping(path = "/ext/{id}")
+    @ApiResponse(responseCode = "200",
+        description = "Test endpoint fetch from db fail",
+        content = {
+            @Content(
+                schema= @Schema(implementation = DemoDTO.class, description = "Demo DTO"),
+                mediaType =  MediaType.APPLICATION_JSON_VALUE
+            )
+        })
+    public Optional<DemoDTO> getDemoFromExtDBDTO(@PathVariable(name = "id")  Long id) {
+        return this.demoService.getDemoExtDBDTO(id);
     }
 
 }

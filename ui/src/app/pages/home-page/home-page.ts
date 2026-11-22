@@ -12,21 +12,22 @@ import { KeycloakService } from '../../core/services/keycloak.service';
 })
 export class HomePage implements OnInit {
 
-  private demoResourceService: DemoResourceService = inject(DemoResourceService);
-  private languageService: LanguageService = inject(LanguageService);
-  private keycloakService: KeycloakService = inject(KeycloakService);
+  private readonly demoResourceService: DemoResourceService = inject(DemoResourceService);
+  private readonly languageService: LanguageService = inject(LanguageService);
+  private readonly keycloakService: KeycloakService = inject(KeycloakService);
 
   item: WritableSignal<DemoDTO | null> = signal<DemoDTO | null>(null);
 
   ngOnInit(): void {
     this.demoResourceService.getDemoDTO().subscribe(data => this.item.set(data));
+    // this.demoResourceService.getDemoFromExtDBDTO(1).subscribe(data => this.item.set(data));
   }
 
-  changeLanguage(lang: string) {
+  changeLanguage(lang: string): void {
     this.languageService.setLanguage(lang);
   }
 
-  logout() {
+  logout(): void {
     this.keycloakService.logout();
   }
 

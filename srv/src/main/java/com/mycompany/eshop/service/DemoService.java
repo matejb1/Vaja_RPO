@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface DemoService {
     DemoDTO getDemoDTO();
     Optional<DemoDTO> getDemoFromDBDTO(Long id);
+    Optional<DemoDTO> getDemoExtDBDTO(Long id);
 }

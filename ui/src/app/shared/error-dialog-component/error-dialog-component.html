@@ -1,0 +1,16 @@
+@if (error(); as violation) {
+  <div
+    style="
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 9999;
+      background: #f8d7da;
+      color: #842029;
+      padding: 12px;
+      border: 1px solid #f5c2c7;
+    "
+  >
+    {{ getTranslationKey(violation.code) | translate: violation.additionalInfo }}
+  </div>
+}

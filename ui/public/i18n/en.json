@@ -13,5 +13,10 @@
         "language": "Language",
         "mainMenu": "Main menu",
         "skipToContent": "Skip to content"
+    },
+    "error": {
+        "1001": "Product {{ 0 }} is not available in warehouse {{ 1 }}.",
+        "1002": "Product {{ 0 }} already exists.",
+        "1003": "This product does not exist."
     }
 }

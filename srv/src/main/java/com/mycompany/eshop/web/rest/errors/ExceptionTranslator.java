@@ -2,10 +2,13 @@ package com.mycompany.eshop.web.rest.errors;
 
 import static org.springframework.core.annotation.AnnotatedElementUtils.findMergedAnnotation;
 
+import com.mycompany.eshop.exception.BusinessErrorCode;
+import com.mycompany.eshop.exception.RuleViolationException;
 import jakarta.servlet.http.HttpServletRequest;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -67,6 +70,24 @@ public class ExceptionTranslator extends ResponseEntityExceptionHandler {
         ProblemDetailWithCause pdCause = wrapAndCustomizeProblem(ex, request);
         return handleExceptionInternal((Exception) ex, pdCause, buildHeaders(ex), HttpStatusCode.valueOf(pdCause.getStatus()), request);
     }
+
+    @ExceptionHandler(RuleViolationException.class)
+    public ResponseEntity<Map<String, Object>> handleRuleViolation(RuleViolationException ex) {
+        Map<String, Object> body = new LinkedHashMap<>();
+
+        BusinessErrorCode businessErrorCode = ex.getType();
+        if (businessErrorCode.getMessage() != null) {
+            body.put("message", businessErrorCode.getMessage());
+        }
+
+        body.put("code", businessErrorCode.getCode());
+        body.put("additionalInfo", ex.getAdditionalInfo());
+
+        return ResponseEntity
+            .status(HttpStatus.UNPROCESSABLE_ENTITY)
+            .body(body);
+    }
+
 
     @Nullable
     @Override

@@ -13,5 +13,10 @@
         "language": "Jezik",
         "mainMenu": "Glavni meni",
         "skipToContent": "Preskoči na vsebino"
+    },
+    "error": {
+        "1001": "Izdelek {{ 0 }} ni na voljo v skladišču {{ 1 }}.",
+        "1002": "Izdelek {{ 0 }} že obstaja.",
+        "1003": "Ta izdelek ne obstaja."
     }
 }

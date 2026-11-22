@@ -11,6 +11,8 @@ import { HttpContext, HttpHeaders } from "@angular/common/http";
 export interface DemoDTO {
     id?: number;
     name?: string;
+    dateTime?: Date;
+    date?: Date;
 }
 
 /** Request Options for Angular HttpClient requests */
