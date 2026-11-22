@@ -1,7 +1,18 @@
 {
     "home": "Doma",
     "navigation": {
-        "logout": "Odjava"
+        "logout": "Odjava",
+        "home": "Domov",
+        "products": "Vsi izdelki",
+        "profile": "Profil",
+        "myProfile": "Moj profil",
+        "settings": "Nastavitve",
+        "theme": "Tema",
+        "themeLight": "Svetla",
+        "themeDark": "Temna",
+        "language": "Jezik",
+        "mainMenu": "Glavni meni",
+        "skipToContent": "Preskoči na vsebino"
     },
     "error": {
         "1001": "Izdelek {{ 0 }} ni na voljo v skladišču {{ 1 }}.",

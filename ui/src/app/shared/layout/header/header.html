@@ -1,0 +1,80 @@
+<header class="sticky top-0 z-10 bg-primary text-on-primary shadow-sm">
+  <nav class="mx-auto flex max-w-7xl items-center gap-2 px-4 py-3"
+       [attr.aria-label]="'navigation.mainMenu' | translate">
+
+    <!-- logo -->
+    <a routerLink="/" class="mr-6 flex items-center gap-2 font-display text-2xl font-extrabold">
+      <i class="ti ti-paw text-3xl" aria-hidden="true"></i>
+      Taček
+    </a>
+
+    <!-- main menu -->
+    <a routerLink="/" routerLinkActive="bg-primary-dark" [routerLinkActiveOptions]="{ exact: true }"
+       class="flex items-center gap-2 rounded-full px-4 py-2 font-semibold transition hover:bg-primary-dark focus-visible:outline-2 focus-visible:outline-cream">
+      <i class="ti ti-home text-xl" aria-hidden="true"></i>
+      {{ 'navigation.home' | translate }}
+    </a>
+    <a routerLink="/products" routerLinkActive="bg-primary-dark"
+       class="rounded-full px-4 py-2 font-semibold transition hover:bg-primary-dark focus-visible:outline-2 focus-visible:outline-cream">
+      {{ 'navigation.products' | translate }}
+    </a>
+
+    <!-- profile and settings -->
+    <div class="ml-auto flex items-center gap-1">
+      <button [cdkMenuTriggerFor]="profileMenu" [attr.aria-label]="'navigation.profile' | translate"
+              class="rounded-full p-2 transition hover:bg-primary-dark focus-visible:outline-2 focus-visible:outline-cream">
+        <i class="ti ti-user text-2xl" aria-hidden="true"></i>
+      </button>
+      <button [cdkMenuTriggerFor]="settingsMenu" [attr.aria-label]="'navigation.settings' | translate"
+              class="rounded-full p-2 transition hover:bg-primary-dark hover:rotate-45 focus-visible:outline-2 focus-visible:outline-cream">
+        <i class="ti ti-settings text-2xl" aria-hidden="true"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- profile menu -->
+<ng-template #profileMenu>
+  <div cdkMenu class="min-w-48 rounded-xl border border-border bg-surface p-1 text-fg shadow-lg">
+    <button cdkMenuItem (cdkMenuItemTriggered)="openProfile()"
+            class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left hover:bg-surface-2 focus:bg-surface-2">
+      <i class="ti ti-id-badge" aria-hidden="true"></i> {{ 'navigation.myProfile' | translate }}
+    </button>
+    <button cdkMenuItem (cdkMenuItemTriggered)="logout()"
+            class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left hover:bg-surface-2 focus:bg-surface-2">
+      <i class="ti ti-logout" aria-hidden="true"></i> {{ 'navigation.logout' | translate }}
+    </button>
+  </div>
+</ng-template>
+
+<!-- settings menu: theme and language -->
+<ng-template #settingsMenu>
+  <div cdkMenu class="min-w-56 rounded-xl border border-border bg-surface p-1 text-fg shadow-lg">
+    <p class="px-3 pt-2 pb-1 text-xs font-semibold uppercase text-muted">{{ 'navigation.theme' | translate }}</p>
+    <div cdkMenuGroup>
+      <button cdkMenuItemRadio [cdkMenuItemChecked]="!isDark()" (cdkMenuItemTriggered)="setDark(false)"
+              class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left hover:bg-surface-2 focus:bg-surface-2">
+        <i class="ti ti-sun" aria-hidden="true"></i> {{ 'navigation.themeLight' | translate }}
+        @if (!isDark()) { <i class="ti ti-check ml-auto text-secondary-strong" aria-hidden="true"></i> }
+      </button>
+      <button cdkMenuItemRadio [cdkMenuItemChecked]="isDark()" (cdkMenuItemTriggered)="setDark(true)"
+              class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left hover:bg-surface-2 focus:bg-surface-2">
+        <i class="ti ti-moon" aria-hidden="true"></i> {{ 'navigation.themeDark' | translate }}
+        @if (isDark()) { <i class="ti ti-check ml-auto text-secondary-strong" aria-hidden="true"></i> }
+      </button>
+    </div>
+
+    <hr class="my-1 border-border">
+
+    <p class="px-3 pt-2 pb-1 text-xs font-semibold uppercase text-muted">{{ 'navigation.language' | translate }}</p>
+    <div cdkMenuGroup>
+      @for (language of languages; track language.code) {
+        <button cdkMenuItemRadio [cdkMenuItemChecked]="isCurrentLanguage(language.code)" (cdkMenuItemTriggered)="setLanguage(language.code)"
+                class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left hover:bg-surface-2 focus:bg-surface-2">
+          <img [src]="'flags/' + language.flag + '.svg'" alt="" class="h-4 w-6 rounded-sm object-cover" /> {{ language.label }}
+          @if (isCurrentLanguage(language.code)) { <i class="ti ti-check ml-auto text-secondary-strong" aria-hidden="true"></i> }
+        </button>
+      }
+    </div>
+  </div>
+</ng-template>

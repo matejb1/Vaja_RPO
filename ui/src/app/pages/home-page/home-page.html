@@ -1,4 +1,3 @@
-<p>home-page works!</p>
 
 <h1>{{ 'home' | translate }}</h1>
 
@@ -8,14 +7,3 @@
         {{ item()?.id }} {{ item()?.name }} {{ item()?.date }}  {{ item()?.dateTime }}
     </div>
 }
-
-
-<div style="border: 1px solid black">
-    <button (click)="changeLanguage('en')">English</button> <br>
-    <button (click)="changeLanguage('sl')">Slovenščina</button> <br>
-    <button (click)="changeLanguage('de')">Deutsch</button> <br>
-</div>
-
-<div style="border: 1px solid red">
-    <button (click)="logout()">{{ 'navigation.logout' | translate}}</button> <br>
-</div>
