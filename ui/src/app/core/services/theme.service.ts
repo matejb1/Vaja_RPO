@@ -1,25 +1,33 @@
-import { Injectable, effect, signal } from '@angular/core';
+import { Service, effect, signal } from '@angular/core';
 
-export type Theme = 'light' | 'dark';
+const STORAGE_KEY = 'app-theme-dark';
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class ThemeService {
-  theme = signal<Theme>(this.initial());
+  private readonly darkMode = signal<boolean>(this.initial());
 
   constructor() {
     effect(() => {
-      document.documentElement.dataset['theme'] = this.theme();
-      localStorage.setItem('app-theme', this.theme());
+      document.documentElement.dataset['theme'] = this.darkMode() ? 'dark' : 'light';
+      localStorage.setItem(STORAGE_KEY, String(this.darkMode()));
     });
   }
 
-  toggle() {
-    this.theme.update(t => (t === 'dark' ? 'light' : 'dark'));
+  isDark(): boolean {
+    return this.darkMode();
   }
 
-  private initial(): Theme {
-    const saved = localStorage.getItem('app-theme');
-    if (saved === 'light' || saved === 'dark') return saved;
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  setDark(value: boolean): void {
+    this.darkMode.set(value);
+  }
+
+  toggle(): void {
+    this.darkMode.update(dark => !dark);
+  }
+
+  private initial(): boolean {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved !== null) return saved === 'true';
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
   }
 }
