@@ -1,8 +1,13 @@
 package com.mycompany.eshop.dto;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public class DemoDTO {
     private Long id;
     private String name;
+    private LocalDateTime dateTime;
+    private LocalDate date;
 
     public Long getId() {
         return id;
@@ -18,5 +23,21 @@ public class DemoDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }

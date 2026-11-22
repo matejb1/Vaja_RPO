@@ -2,5 +2,10 @@
     "home": "Home",
     "navigation": {
         "logout": "Logout"
+    },
+    "error": {
+        "1001": "Product {{ 0 }} is not available in warehouse {{ 1 }}.",
+        "1002": "Product {{ 0 }} already exists.",
+        "1003": "This product does not exists."
     }
 }
