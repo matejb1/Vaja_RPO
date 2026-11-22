@@ -2,10 +2,12 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideDefaultClient } from './api';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { createInterceptorCondition, INCLUDE_BEARER_TOKEN_INTERCEPTOR_CONFIG, IncludeBearerTokenCondition, includeBearerTokenInterceptor, provideKeycloak } from 'keycloak-angular';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
+import { RuleViolationInterceptor } from './core/errors/rule-violation-response.interceptor';
+import { bootstrapApplication } from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,7 +18,7 @@ export const appConfig: ApplicationConfig = {
       basePath: "http://localhost:8081",
     }),
 
-    provideHttpClient( withInterceptors([includeBearerTokenInterceptor]) ),
+    provideHttpClient( withInterceptors([includeBearerTokenInterceptor, RuleViolationInterceptor]) ),
     {
       provide: INCLUDE_BEARER_TOKEN_INTERCEPTOR_CONFIG,
       useValue: [
@@ -46,7 +48,7 @@ export const appConfig: ApplicationConfig = {
       }),
       lang: 'en',
       fallbackLang: 'en'
-    })
+    }),
 
   ]
 };

@@ -2,5 +2,10 @@
     "home": "Haus",
     "navigation": {
         "logout": "Abmelden"
+    },
+    "error": {
+        "1001": "Produkt {{ 0 }} ist im Lager {{ 1 }} nicht verfügbar.",
+        "1002": "Produkt {{ 0 }} ist bereits vorhanden.",
+        "1003": "Dieses Produkt existiert nicht."
     }
 }
