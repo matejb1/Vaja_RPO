@@ -13,8 +13,10 @@ CONTAINER="sqlserver"
 BACKUP="/var/opt/mssql/backup/${DB_NAME}.bak"
 SQLCMD="/opt/mssql-tools18/bin/sqlcmd"
 
-# Create backup directory inside container
-docker exec "$CONTAINER" mkdir -p /var/opt/mssql/backup
+# Create backup directory inside container and set permissions
+docker exec -u root "$CONTAINER" mkdir -p /var/opt/mssql/backup
+docker exec -u root "$CONTAINER" chown -R mssql:mssql /var/opt/mssql/backup
+docker exec -u root "$CONTAINER" chmod 755 /var/opt/mssql/backup
 
 # Create database backup
 docker exec "$CONTAINER" "$SQLCMD" \
